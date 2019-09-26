@@ -9,3 +9,5 @@ RUN apt-get update \
   && tar xzvf install-tl-unx.tar.gz \
   && ./install-tl-*/install-tl -profile texlive.profile \
   && rm -rf install-tl-*
+
+ENV PATH="/usr/local/texlive/2019/bin/x86_64-linux:${PATH}"

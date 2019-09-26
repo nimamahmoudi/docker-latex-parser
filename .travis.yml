@@ -3,8 +3,13 @@ services:
   - docker
 jobs:
   include:
+    - stage: Build and Push Texlive Alpine 2019
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build ./texlive/2019/ -f ./texlive/2019/Dockerfile-alpine -t nimamahmoudi/texlive-2019:alpine
+        - docker push nimamahmoudi/texlive-2019:alpine
     - stage: Build and Push Texlive 2019
       script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker build ./texlive/2019-alpine/ -t nimamahmoudi/texlive-2019:alpine
-        - docker push nimamahmoudi/texlive-2019:alpine
+        - docker build ./texlive/2019/ -t nimamahmoudi/texlive-2019:debian
+        - docker push nimamahmoudi/texlive-2019:debian
