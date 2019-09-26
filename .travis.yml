@@ -1,7 +1,7 @@
 sudo: required
 services:
   - docker
-jobs:
+matrix:
   include:
     - stage: Build and Push Texlive Alpine 2019
       script:
