@@ -1,5 +1,7 @@
 FROM debian:10
 
+# Install TeX live
+COPY texlive.profile /
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
     wget perl fontconfig libwww-perl \
