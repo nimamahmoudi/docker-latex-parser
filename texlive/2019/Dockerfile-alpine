@@ -13,4 +13,4 @@ RUN wget ftp://tug.org/historic/systems/texlive/2019/install-tl-unx.tar.gz \
   && rm -rf install-tl-* \
   && rm texlive.profile
 
-ENV PATH="/usr/local/texlive/2019/bin/x86_64-linuxmusl:${PATH}"
+ENV PATH="/usr/local/texlive/2019/bin/x86_64-linux:${PATH}"
