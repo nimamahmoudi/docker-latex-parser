@@ -3,7 +3,7 @@ services:
   - docker
 matrix:
   include:
-    - stage: Build and Push Texlive 2019
+    - stage: Build and Push Texlive 2019 and Pandoc
       # Currently alpine is now working due to chmod issues!
       script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -15,3 +15,9 @@ matrix:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build ./pandoc/ -t nimamahmoudi/pandoc
       - docker push nimamahmoudi/pandoc
+    - stage: Build Composite Docker Image
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build ./latex-parser/ -t nimamahmoudi/latex-parser
+        - docker push nimamahmoudi/latex-parser
+
