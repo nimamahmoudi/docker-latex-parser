@@ -1,5 +1,8 @@
 FROM alpine
 
+# Original Installation Manager File:
+# ftp://tug.org/historic/systems/texlive/2019/install-tl-unx.tar.gz
+
 # Install packages to download TeX live
 RUN apk update \
   && apk add perl wget xz \
@@ -7,7 +10,7 @@ RUN apk update \
 
 # Install TeX live
 COPY texlive.profile /
-RUN wget ftp://tug.org/historic/systems/texlive/2019/install-tl-unx.tar.gz \
+RUN wget https://github.com/nimamahmoudi/docker-latex-parser/raw/master/texlive/2019/install-tl-unx.tar.gz \
   && tar xzvf install-tl-unx.tar.gz \
   && ./install-tl-*/install-tl -profile texlive.profile \
   && rm -rf install-tl-* \
