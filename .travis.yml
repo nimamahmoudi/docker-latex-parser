@@ -15,6 +15,10 @@ matrix:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build ./pandoc/ -t nimamahmoudi/pandoc
       - docker push nimamahmoudi/pandoc
+      # Push also to github packages
+      - echo "$GITHUB_PACKAGE_PASSWORD" | docker login docker.pkg.github.com -u "$GITHUB_PACKAGE_USERNAME" --password-stdin
+      - docker tag nimamahmoudi/pandoc "docker.pkg.github.com/$GITHUB_PACKAGE_USERNAME/docker-latex-parser/pandoc"
+      - docker push "docker.pkg.github.com/$GITHUB_PACKAGE_USERNAME/docker-latex-parser/pandoc"
     - stage: Build Composite Docker Image
       script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
