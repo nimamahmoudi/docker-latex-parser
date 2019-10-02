@@ -11,6 +11,10 @@ matrix:
         - docker push nimamahmoudi/texlive-2019:debian
         - docker tag nimamahmoudi/texlive-2019:debian nimamahmoudi/texlive-2019
         - docker push nimamahmoudi/texlive-2019
+        # Push also to github packages
+        - echo "$GITHUB_PACKAGE_PASSWORD" | docker login docker.pkg.github.com -u "$GITHUB_PACKAGE_USERNAME" --password-stdin
+        - docker tag nimamahmoudi/texlive-2019 "docker.pkg.github.com/$GITHUB_PACKAGE_USERNAME/docker-latex-parser/texlive-2019"
+        - docker push "docker.pkg.github.com/$GITHUB_PACKAGE_USERNAME/docker-latex-parser/texlive-2019"
     - script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build ./pandoc/ -t nimamahmoudi/pandoc
@@ -24,4 +28,8 @@ matrix:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker build ./latex-parser/ -t nimamahmoudi/latex-parser
         - docker push nimamahmoudi/latex-parser
+        # Push also to github packages
+        - echo "$GITHUB_PACKAGE_PASSWORD" | docker login docker.pkg.github.com -u "$GITHUB_PACKAGE_USERNAME" --password-stdin
+        - docker tag nimamahmoudi/latex-parser "docker.pkg.github.com/$GITHUB_PACKAGE_USERNAME/docker-latex-parser/latex-parser"
+        - docker push "docker.pkg.github.com/$GITHUB_PACKAGE_USERNAME/docker-latex-parser/latex-parser"
 
