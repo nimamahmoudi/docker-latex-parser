@@ -12,6 +12,8 @@ docker run -t --mount src=$BUILD_DIR/,target=/repo,type=bind nimamahmoudi/latex-
 
 # Latex
 docker run -t --mount src=$BUILD_DIR/,target=/repo,type=bind nimamahmoudi/latex-parser /bin/bash -c "cd /repo/ && pdflatex main && bibtex main && pdflatex main && pdflatex main"
+# Or use latexmk
+docker run -t --mount src=$BUILD_DIR/,target=/repo,type=bind nimamahmoudi/latex-parser /bin/bash -c "cd /repo/ && latexmk -pdf"
 ```
 
 ## Notes
